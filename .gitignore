@@ -1,3 +1,12 @@
 .vscode
 .DS_Store
 venv
+
+# no audio files
+*.mp3
+*.wav
+*.ogg
+*.flac
+*.m4a
+*.wma
+*.aac
