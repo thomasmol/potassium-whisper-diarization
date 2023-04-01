@@ -35,7 +35,7 @@ def init():
 
 
 # @app.handler runs for every call
-@app.handler()
+@app.handler("/")
 def handler(context: dict, request: Request) -> Response:
     prompt = request.json.get("prompt")
     filename = request.json.get("filename")
