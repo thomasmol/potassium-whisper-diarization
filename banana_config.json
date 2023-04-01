@@ -1,0 +1,21 @@
+{
+    "name": "potassium-app-whisper-diarization",
+    "category": "Speech to Text",
+    "example_input": {
+        "prompt": "Hello I am a [MASK] model.",
+        "num_speakers": 2,
+        "filename": "someaudio.mp3",
+        "file": "base64 encoded audio file"
+    },
+    "example_output": {
+        "segments":[
+            {
+                "start":"00:00:00",
+                "end":"00:00:12",
+                "speaker":"SPEAKER 1",
+                "text":"This is an example of a whisper + pyannote diarization."
+            }
+        ]
+    },
+    "version": "1"
+}
