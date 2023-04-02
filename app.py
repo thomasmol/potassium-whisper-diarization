@@ -64,8 +64,6 @@ def handler(context: dict, request: Request) -> Response:
     )
     os.remove(filename)
     print(f"{filename} removed, done with inference")
-    print("transcription:", transcription)
-    print("webhook_url:", webhook_url)
     print("webhook_id:", webhook_id)
     send_webhook(
         url=webhook_url, json={"segments": transcription, "webhook_id": webhook_id}
@@ -125,7 +123,8 @@ def speech_to_text(filepath, model, embedding_model, num_speakers, prompt):
             embeddings[i] = segment_embedding(segment)
         embeddings = np.nan_to_num(embeddings)
         print(f"Embedding shape: {embeddings.shape}")
-
+        # Convert number of speakers to int
+        num_speakers = int(num_speakers)
         # Assign speaker label
         clustering = AgglomerativeClustering(num_speakers).fit(embeddings)
         labels = clustering.labels_
