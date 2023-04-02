@@ -17,6 +17,7 @@ from pyannote.audio.pipelines.speaker_verification import PretrainedSpeakerEmbed
 
 app = Potassium("whisper_diarization")
 
+
 # @app.init runs at startup, and loads models into the app's context
 @app.init
 def init():
@@ -29,6 +30,7 @@ def init():
     context = {"model": model, "embedding_model": embedding_model}
 
     return context
+
 
 # @app.async_handler runs for every call
 @app.async_handler("/")
@@ -57,15 +59,23 @@ def handler(context: dict, request: Request) -> Response:
     with open(filename, "wb") as f:
         f.write(file_data)
 
-    transcription = speech_to_text(filename,model, embedding_model, num_speakers, prompt)
+    transcription = speech_to_text(
+        filename, model, embedding_model, num_speakers, prompt
+    )
     os.remove(filename)
-    print(f'{filename} removed, done with inference')
-    # TODO should send id of request to webhook
-    send_webhook(url=webhook_url, json={"segments": transcription, "webhook_id": webhook_id})
+    print(f"{filename} removed, done with inference")
+    print("transcription:", transcription)
+    print("webhook_url:", webhook_url)
+    print("webhook_id:", webhook_id)
+    send_webhook(
+        url=webhook_url, json={"segments": transcription, "webhook_id": webhook_id}
+    )
     return
+
 
 def convert_time(secs):
     return datetime.timedelta(seconds=round(secs))
+
 
 def speech_to_text(filepath, model, embedding_model, num_speakers, prompt):
     time_start = time.time()
@@ -147,6 +157,7 @@ def speech_to_text(filepath, model, embedding_model, num_speakers, prompt):
     except Exception as e:
         os.remove(audio_file_wav)
         raise RuntimeError("Error Running inference with local model", e)
+
 
 if __name__ == "__main__":
     app.serve()
