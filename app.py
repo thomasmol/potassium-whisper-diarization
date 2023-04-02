@@ -38,6 +38,7 @@ def handler(context: dict, request: Request) -> Response:
     file = request.json.get("file")
     num_speakers = request.json.get("num_speakers")
     webhook_url = request.json.get("webhook_url")
+    webhook_id = request.json.get("webhook_id")
     model = context.get("model")
     embedding_model = context.get("embedding_model")
 
@@ -59,7 +60,8 @@ def handler(context: dict, request: Request) -> Response:
     transcription = speech_to_text(filename,model, embedding_model, num_speakers, prompt)
     os.remove(filename)
     print(f'{filename} removed, done with inference')
-    send_webhook(url=webhook_url, json={"segments": transcription})
+    # TODO should send id of request to webhook
+    send_webhook(url=webhook_url, json={"segments": transcription, "webhook_id": webhook_id})
     return
 
 def convert_time(secs):

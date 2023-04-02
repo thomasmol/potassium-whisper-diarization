@@ -2,12 +2,15 @@
     "name": "potassium-app-whisper-diarization",
     "category": "Speech to Text",
     "example_input": {
-        "prompt": "Hello I am a [MASK] model.",
+        "prompt": "An interview about science",
         "num_speakers": 2,
         "filename": "someaudio.mp3",
-        "file": "base64 encoded audio file"
+        "file": "base64 encoded audio file",
+        "webhook_url": "http://localhost:5000/webhook",
+        "webhook_id": "someid"
     },
     "example_output": {
+        "webhook_id": "someid",
         "segments":[
             {
                 "start":"00:00:00",
