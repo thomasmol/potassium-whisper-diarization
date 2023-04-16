@@ -60,6 +60,21 @@ def handler(context: dict, request: Request) -> Response:
             status=400,
         )
 
+    try:
+        # Convert number of speakers to int
+        num_speakers = int(num_speakers)
+        chunk_index = int(chunk_index)
+        chunk_count = int(chunk_count)
+        offset_seconds = int(offset_seconds)
+    except Exception as e:
+        return Response(
+            json={
+                "status": "failed",
+                "message": "num_speakers, chunk_index, chunk_count and offset_seconds need to be integers"
+            },
+            status=400,
+        )
+
     ts = time.time()
     ts = datetime.datetime.fromtimestamp(ts).strftime("%Y-%m-%d-%H-%M-%S")
     file_start, file_ending = os.path.splitext(f"{filename}")
@@ -177,10 +192,7 @@ def speech_to_text(
         embeddings = np.nan_to_num(embeddings)
         print(f"Embedding shape: {embeddings.shape}")
 
-        # Convert number of speakers to int
-        num_speakers = int(num_speakers)
-        chunk_index = int(chunk_index)
-        chunk_count = int(chunk_count)
+
 
         # Assign speaker label
         clustering = AgglomerativeClustering(num_speakers).fit(embeddings)
