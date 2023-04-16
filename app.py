@@ -54,6 +54,7 @@ def handler(context: dict, request: Request) -> Response:
     if sum([file_string is not None, file_url is not None, file is not None]) != 1:
         return Response(
             json={
+                "status": "failed",
                 "message": "No correct input provided, either provide file_string, file_url or a file"
             },
             status=400,
@@ -99,6 +100,7 @@ def handler(context: dict, request: Request) -> Response:
     send_webhook(
         url=webhook_url,
         json={
+            "status": "succeeded",
             "segments": segments,
             "webhook_id": webhook_id,
             "chunk_index": chunk_index,
