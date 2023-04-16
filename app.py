@@ -55,7 +55,7 @@ def handler(context: dict, request: Request) -> Response:
         return Response(
             json={
                 "status": "failed",
-                "message": "No correct input provided, either provide file_string, file_url or a file"
+                "message": "No correct input provided, either provide file_string, file_url or a file",
             },
             status=400,
         )
@@ -70,7 +70,7 @@ def handler(context: dict, request: Request) -> Response:
         return Response(
             json={
                 "status": "failed",
-                "message": "num_speakers, chunk_index, chunk_count and offset_seconds need to be integers"
+                "message": "num_speakers, chunk_index, chunk_count and offset_seconds need to be integers",
             },
             status=400,
         )
@@ -101,8 +101,6 @@ def handler(context: dict, request: Request) -> Response:
         embedding_model,
         num_speakers,
         prompt,
-        chunk_index,
-        chunk_count,
         offset_seconds,
     )
 
@@ -137,8 +135,6 @@ def speech_to_text(
     embedding_model,
     num_speakers,
     prompt,
-    chunk_index,
-    chunk_count,
     offset_seconds=0,
 ):
     time_start = time.time()
@@ -191,8 +187,6 @@ def speech_to_text(
             embeddings[i] = segment_embedding(segment)
         embeddings = np.nan_to_num(embeddings)
         print(f"Embedding shape: {embeddings.shape}")
-
-
 
         # Assign speaker label
         clustering = AgglomerativeClustering(num_speakers).fit(embeddings)
