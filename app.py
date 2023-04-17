@@ -103,6 +103,7 @@ def handler(context: dict, request: Request) -> Response:
         prompt,
         offset_seconds,
     )
+    print("segment 0:", segments[0])
 
     if file_ending != ".wav":
         print("removing non wav file")
@@ -122,6 +123,7 @@ def handler(context: dict, request: Request) -> Response:
             "file_url": file_url,
         },
     )
+    print("sent webhook")
     return
 
 
