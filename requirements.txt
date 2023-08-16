@@ -1,5 +1,5 @@
 faster-whisper==0.7.1
-potassium
+potassium>=0.1.2
 torch==1.13.0
 transformers==4.25.1
 accelerate==0.15.0
