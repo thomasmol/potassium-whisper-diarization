@@ -8,6 +8,7 @@ WORKDIR /
 # Install git
 RUN apt-get update && apt-get install -y build-essential git
 RUN apt-get install -y ffmpeg
+RUN apt-get install -y libmagic1
 
 # Install python packages
 RUN pip3 install --upgrade pip
