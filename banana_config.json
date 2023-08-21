@@ -1,34 +1,82 @@
 {
-    "name": "potassium-app-whisper-diarization",
-    "category": "Audio",
-    "example_input": {
-        "prompt": "An interview about science",
-        "num_speakers": 2,
-        "filename": "someaudio.mp3",
-        "file": "audio file",
-        "file_url": "http://localhost:5000/someaudio.mp3",
-        "file_string": "base64 encoded audio file",
-        "chunk_index": 0,
-        "chunk_count": 1,
-        "offset_seconds": 0,
-        "webhook_url": "http://localhost:5000/webhook",
-        "webhook_id": "someid"
-    },
-    "example_output": {
-        "webhook_id": "someid",
-        "webhook_url": "http://localhost:5000/webhook",
-        "chunk_count": 1,
-        "chunk_index": 0,
-        "offset_seconds": 0,
-        "file_url": "http://localhost:5000/someaudio.mp3",
-        "segments":[
-            {
-                "start":"0",
-                "end":"12",
-                "speaker":"SPEAKER 1",
-                "text":"This is an example of a whisper + pyannote diarization."
-            }
+  "name": "potassium-whisper-diarization",
+  "category": "Audio",
+  "example_input": {
+    "file_url": "http://localhost:5000/someaudio.mp3",
+    "file_string": "base64 encoded audio file",
+    "prompt": "An interview about science",
+    "num_speakers": 2,
+    "offset_seconds": 0,
+    "webhook_url": "http://localhost:5000/webhook?id=someid&chunk_count=1&chunk_index=0",
+    "group_segments": true
+  },
+  "example_output": {
+    "status": "succeeded",
+    "segments": [
+      {
+        "start": "0",
+        "end": "12",
+        "speaker": "SPEAKER 1",
+        "text": "This is an example of a whisper + pyannote diarization.",
+        "words": [
+          {
+            "start": "0",
+            "end": "1",
+            "word": "This"
+          },
+          {
+            "start": "1",
+            "end": "2",
+            "word": "is"
+          },
+          {
+            "start": "2",
+            "end": "3",
+            "word": "an"
+          },
+          {
+            "start": "3",
+            "end": "4",
+            "word": "example"
+          },
+          {
+            "start": "4",
+            "end": "5",
+            "word": "of"
+          },
+          {
+            "start": "5",
+            "end": "6",
+            "word": "a"
+          },
+          {
+            "start": "6",
+            "end": "7",
+            "word": "whisper"
+          },
+          {
+            "start": "7",
+            "end": "8",
+            "word": "+"
+          },
+          {
+            "start": "8",
+            "end": "9",
+            "word": "pyannote"
+          },
+          {
+            "start": "9",
+            "end": "10",
+            "word": "diarization"
+          },
+          {
+            "start": "10",
+            "end": "11",
+            "word": "."
+          }
         ]
-    },
-    "version": "2"
+      }
+    ]
+  },
+  "version": "3"
 }
